@@ -50,23 +50,16 @@ export default class extends React.Component {
   };
 
   render() {
-    const {
-      tvResults,
-      movieResults,
-      searchTerm,
-      error,
-      loading,
-      handleSubmit,
-    } = this.state;
+    const { tvResults, movieResults, searchTerm, error, loading } = this.state;
 
     return (
       <SearchPresenter
         tvResults={tvResults}
         movieResults={movieResults}
         searchTerm={searchTerm}
+        handleSubmit={this.handleSubmit}
         error={error}
         loading={loading}
-        handleSubmit={handleSubmit}
       />
     );
   }
