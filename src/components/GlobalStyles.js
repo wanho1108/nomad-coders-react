@@ -9,7 +9,7 @@ export default createGlobalStyle`
   }
 
   body {
-    padding-top: 50px;
+    padding-top: 80px;
     background-color: rgba(20, 20, 20, 1);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 14px;
