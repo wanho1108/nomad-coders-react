@@ -7,7 +7,7 @@ import Poster from "components/Poster";
 import Message from "components/Message";
 
 const Container = styled.div`
-  padding: 0 20px;
+  padding: 20px;
 `;
 
 const Form = styled.form`
