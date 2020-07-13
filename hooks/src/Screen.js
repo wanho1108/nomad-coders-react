@@ -1,16 +1,15 @@
 import React from "react";
-import Header from "./Header";
-import { useFns } from "./context";
+import { useSetLang, UseHyperTranslate } from "./context";
 
 const Screen = () => {
-  const { logUserIn } = useFns();
+  const setLang = useSetLang();
+  const hyperTranslate = UseHyperTranslate();
 
   return (
-    <div>
-      <Header />
-      <h1>First Screen</h1>
-      <button onClick={logUserIn}>Log user in</button>
-    </div>
+    <>
+      <h1>{hyperTranslate("Hello!")}</h1>
+      <button onClick={() => setLang("es")}>Translate</button>
+    </>
   );
 };
 
