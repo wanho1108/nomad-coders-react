@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.span<{ isRed: boolean }>`
-  color: ${(props) => (props.isRed ? "red" : "black")};
+  color: ${(props) => (props.isRed ? props.theme.redColor : "black")};
 `;
 
 interface IProps {
