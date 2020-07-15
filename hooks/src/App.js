@@ -1,27 +1,5 @@
 import React, { useReducer, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-
-const initialState = {
-  todos: [],
-};
-
-const ADD = "add";
-const DEL = "del";
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case ADD:
-      return {
-        todos: [...state.todos, { id: uuidv4(), text: action.payload }],
-      };
-    case DEL:
-      return {
-        todos: state.todos.filter((todo) => todo.id !== action.payload),
-      };
-    default:
-      throw new Error();
-  }
-};
+import reducer, { initialState, ADD, DEL, COMPLETE } from "./reducer";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -58,7 +36,41 @@ function App() {
               type="button"
               onClick={() => dispatch({ type: DEL, payload: todo.id })}
             >
-              ❌
+              <span role="img" aria-label="Delete">
+                ❌
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => dispatch({ type: COMPLETE, payload: todo.id })}
+            >
+              <span role="img" aria-label="Complete">
+                ✔
+              </span>
+            </button>
+          </li>
+        ))}
+      </ul>
+      <hr />
+      <ul>
+        {state.completed.map((todo) => (
+          <li key={todo.id}>
+            {todo.text}
+            <button
+              type="button"
+              onClick={() => dispatch({ type: DEL, payload: todo.id })}
+            >
+              <span role="img" aria-label="Delete">
+                ❌
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => dispatch({ type: DEL, payload: todo.id })}
+            >
+              <span role="img" aria-label="UnComplete">
+                ✔❌
+              </span>
             </button>
           </li>
         ))}
