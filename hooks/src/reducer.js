@@ -8,6 +8,7 @@ export const initialState = {
 export const ADD = "add";
 export const DEL = "del";
 export const COMPLETE = "complete";
+export const UNCOMPLETE = "uncomplete";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -22,12 +23,24 @@ const reducer = (state, action) => {
         todos: state.todos.filter((todo) => todo.id !== action.payload),
       };
     case COMPLETE:
-      const target = state.todos.find((todo) => todo.id === action.payload);
+      const completeTarget = state.todos.find(
+        (todo) => todo.id === action.payload
+      );
 
       return {
         ...state,
         todos: state.todos.filter((todo) => todo.id !== action.payload),
-        completed: [...state.completed, target],
+        completed: [...state.completed, completeTarget],
+      };
+    case UNCOMPLETE:
+      const uncompleteTarget = state.completed.find(
+        (todo) => todo.id === action.payload
+      );
+
+      return {
+        ...state,
+        todos: [...state.todos, uncompleteTarget],
+        completed: state.completed.filter((todo) => todo.id !== action.payload),
       };
     default:
       throw new Error();
