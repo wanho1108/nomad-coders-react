@@ -15,8 +15,26 @@ const TodoProvider = ({ children }) => {
 
 export const useDispatch = () => {
   const { dispatch } = useContext(TodoContext);
-
   return dispatch;
+};
+
+// export const useTodo = () => {
+//   const {
+//     state: { todos },
+//   } = useContext(TodoContext);
+//   return todos;
+// };
+
+// export const useCompleted = () => {
+//   const {
+//     state: { completed },
+//   } = useContext(TodoContext);
+//   return completed;
+// };
+
+export const useState = () => {
+  const { state } = useContext(TodoContext);
+  return state;
 };
 
 export default TodoProvider;
