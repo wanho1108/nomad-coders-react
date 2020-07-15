@@ -1,27 +1,52 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 
-const INCREMENT = "increment";
-const DECREMENT = "decrement";
+const initialState = {
+  todos: [],
+};
+
+const ADD = "increment";
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case INCREMENT:
-      return { count: state.count + 1 };
-    case DECREMENT:
-      return { count: state.count - 1 };
+    case ADD:
+      return { todos: [...state.todos, { text: action.payload }] };
     default:
       throw new Error();
   }
 };
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, { count: 0 });
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [newTodo, setNewTodo] = useState();
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch({ type: ADD, payload: newTodo });
+    setNewTodo("");
+  };
+  const onChange = (e) => {
+    const {
+      target: { value },
+    } = e;
+    setNewTodo(value);
+  };
 
   return (
     <>
-      <h1>{state.count}</h1>
-      <button onClick={() => dispatch({ type: INCREMENT })}>Increment</button>
-      <button onClick={() => dispatch({ type: DECREMENT })}>Decrement</button>
+      <h1>Todos</h1>
+      <form>
+        <input
+          type="text"
+          placeholder="Add todo"
+          onChange={onChange}
+          value={newTodo}
+        />
+        <button onClick={onSubmit}>Add</button>
+      </form>
+      <ul>
+        {state.todos.map((todo, index) => (
+          <li key={index}>{todo.text}</li>
+        ))}
+      </ul>
     </>
   );
 }
