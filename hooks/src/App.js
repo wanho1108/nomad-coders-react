@@ -1,15 +1,23 @@
 import React, { useReducer, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const initialState = {
   todos: [],
 };
 
-const ADD = "increment";
+const ADD = "add";
+const DEL = "del";
 
 const reducer = (state, action) => {
   switch (action.type) {
     case ADD:
-      return { todos: [...state.todos, { text: action.payload }] };
+      return {
+        todos: [...state.todos, { id: uuidv4(), text: action.payload }],
+      };
+    case DEL:
+      return {
+        todos: state.todos.filter((todo) => todo.id !== action.payload),
+      };
     default:
       throw new Error();
   }
@@ -43,8 +51,16 @@ function App() {
         <button onClick={onSubmit}>Add</button>
       </form>
       <ul>
-        {state.todos.map((todo, index) => (
-          <li key={index}>{todo.text}</li>
+        {state.todos.map((todo) => (
+          <li key={todo.id}>
+            {todo.text}
+            <button
+              type="button"
+              onClick={() => dispatch({ type: DEL, payload: todo.id })}
+            >
+              ❌
+            </button>
+          </li>
         ))}
       </ul>
     </>
